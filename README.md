@@ -8,8 +8,8 @@ A newspaper front-page infographic that sums up Wednesday 18 November 2026
 in one image: a bold masthead naming the day, then six panels covering the
 day's most consequential stories across regions and fields — Ukraine striking
 the Crimean Bridge for a second day running, Trump landing in Manila for the
-ASEAN / Quad summit, Iranian drones hitting a US radar site in Bahrain,
-Nvidia shares cheering as Jensen Huang is open to returning, Britain
+Quad talks on the ASEAN summit's sidelines, Iranian drones hitting a US radar
+site in Bahrain, Jensen Huang open to returning to Nvidia, Britain
 sanctioning firms over West Bank settlements, and Cyclone Akvan strengthening
 over the Bay of Bengal. Each panel pairs a simple drawn pictogram with a
 short headline and one factual sublabel, so the whole day reads clearly from

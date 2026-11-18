@@ -99,19 +99,21 @@ def icon_drone(d, cx, cy):
         d.line([(cx + sx * 20, cy + sy * 14), (ax, ay)], fill=INK, width=6)
         d.ellipse([ax - 26, ay - 7, ax + 26, ay + 7], fill=BLUE)
         d.ellipse([ax - 7, ay - 7, ax + 7, ay + 7], fill=INK)
-    # signal rings below the drone
-    d.arc([cx - 42, cy + 46, cx + 42, cy + 78], start=0, end=180,
-          fill=GREY, width=4)
-    d.arc([cx - 22, cy + 54, cx + 22, cy + 74], start=0, end=180,
-          fill=GREY, width=4)
+    # radar target below the drone, with an impact mark
+    tx, ty = cx, cy + 62
+    d.ellipse([tx - 17, ty - 17, tx + 17, ty + 17], outline=BLUE, width=4)
+    d.ellipse([tx - 7, ty - 7, tx + 7, ty + 7], fill=RED)
+    for dx, dy in ((-24, -8), (24, -8), (0, -26)):
+        d.line([(tx + dx, ty + dy), (tx + dx * 2 // 3, ty + dy * 2 // 3)],
+               fill=RED, width=4)
 
 
 def icon_chip(d, cx, cy):
     # Processor with pins and a red core marked N.
     for i in range(4):
         x = cx - 45 + i * 30
-        d.line([(x, cy - 80), (x, cy - 58)], fill=INK, width=6)
-        d.line([(x, cy + 58), (x, cy + 80)], fill=INK, width=6)
+        d.line([(x, cy - 68), (x, cy - 58)], fill=INK, width=6)
+        d.line([(x, cy + 58), (x, cy + 68)], fill=INK, width=6)
         y = cy - 45 + i * 30
         d.line([(cx - 80, y), (cx - 58, y)], fill=INK, width=6)
         d.line([(cx + 58, y), (cx + 80, y)], fill=INK, width=6)
@@ -146,9 +148,6 @@ def icon_cyclone(d, cx, cy):
         d.arc([cx - r, cy - r, cx + r, cy + r], start=start,
               end=start + 300, fill=BLUE, width=7)
     d.ellipse([cx - 10, cy - 10, cx + 10, cy + 10], fill=RED)
-    for i, x in enumerate((-78, -44, -10, 24, 58)):
-        y = cy + 62 + (i % 2) * 8
-        d.line([(cx + x, y), (cx + x - 6, y + 22)], fill=BLUE, width=4)
     d.arc([cx - 92, cy + 52, cx - 32, cy + 78], start=0, end=180,
           fill=BLUE, width=5)
     d.arc([cx + 32, cy + 52, cx + 92, cy + 78], start=0, end=180,
@@ -160,22 +159,22 @@ def icon_cyclone(d, cx, cy):
 STORIES = [
     ("EUROPE  ·  WAR", icon_bridge,
      "Ukraine hits Crimean Bridge a second day",
-     "Russia pounds Kyiv bridges in reply."),
+     "Russia strikes back at Kyiv."),
     ("ASIA  ·  DIPLOMACY", icon_plane,
      "Trump in Manila for Quad talks",
-     "ASEAN summit opens ahead of China visit."),
+     "Quad meets on ASEAN sidelines."),
     ("MIDDLE EAST  ·  CONFLICT", icon_drone,
      "Iran drones hit US radar in Bahrain",
-     "US\u2013Iran exchange widens across the Gulf."),
+     "Gulf exchange widens."),
     ("TECH  ·  MARKETS", icon_chip,
-     "Nvidia cheers as Huang open to return",
-     "Shares rise after Tuesday\u2019s earnings."),
+     "Huang open to return to Nvidia",
+     "Shares rise after earnings."),
     ("EUROPE  ·  DIPLOMACY", icon_document,
      "Britain sanctions settlement firms",
-     "Eight firms hit over West Bank settlements."),
+     "Eight firms hit."),
     ("ASIA  ·  WEATHER", icon_cyclone,
      "Cyclone Akvan strengthens in Bay of Bengal",
-     "Andhra Pradesh and Odisha on high alert."),
+     "States on high alert."),
 ]
 
 
@@ -205,9 +204,9 @@ def main():
     x0, y0, gap = 24, 224, 16
     pw = (W - 2 * x0 - 2 * gap) // 3          # 314
     ph = (H - y0 - 24 - gap) // 2             # 380
-    tag_f = fnt(BOLD, 17)
+    tag_f = fnt(BOLD, 19)
     head_f = fnt(BOLD, 29)
-    sub_f = fnt(REG, 20)
+    sub_f = fnt(REG, 23)
 
     for i, (tag, icon, headline, sublabel) in enumerate(STORIES):
         r, c = divmod(i, 3)
